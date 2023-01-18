@@ -87,9 +87,12 @@ main {
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
-  
 
-.textLogo {
+.form-bg {
+    background-color: #f5f5f5 !important;
+}
+
+.text-logo {
     color: rgb(255, 255, 255) !important;
     font-family: 'Spartan, Arial, Helvetica, sans-serif';
     font-weight: 600;
