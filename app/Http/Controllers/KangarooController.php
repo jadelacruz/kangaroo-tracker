@@ -42,11 +42,6 @@ class KangarooController extends Controller
         return view('kangaroo.form');
     }
 
-    public function store()
-    {
-
-    }
-
     /**
      * 
      */

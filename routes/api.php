@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\KangarooController;
+use App\Http\Controllers\API\KangarooApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::controller(KangarooController::class)
+Route::controller(KangarooApiController::class)
+    ->prefix('kangaroo')
     ->group(function () {
-        Route::get('/kangaroo/{id}', 'show');
-        Route::post('/kangaroo', 'insert');
-        Route::put('/kangaroo/{id}', 'update');
-        Route::delete('/kangaroo/{id}', 'destroy');
+        Route::get('/', 'getAll');
+        Route::get('/{iId}', 'getById');
+        Route::post('/', 'insert');
+        Route::put('/{iId}', 'update');
+        Route::delete('{iId}', 'destroy');
     });

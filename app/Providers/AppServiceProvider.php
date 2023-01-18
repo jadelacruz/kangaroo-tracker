@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Kangaroo;
+use App\Repository\KangarooRepository;
+use App\Services\KangarooService;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
 
@@ -21,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
         
         // Remove the automatic migration for personal access token
         Sanctum::ignoreMigrations();
+
+        $this->app->bind(KangarooService::class, function ($app) {
+            return new KangarooService(new KangarooRepository(new Kangaroo()));
+        });
     }
 
     /**
