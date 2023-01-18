@@ -2,12 +2,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-
-            <div class="col-md-12">
-                <p class="h3">Kangaroo Tracker</p>
-                <hr />
-            </div>
-
+            
             <div class="col-md-4 mb-3">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-success">Add <i class="fa fa-plus"></i></button>

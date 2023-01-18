@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomePageController;
+use App\Http\Controllers\KangarooPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(HomePageController::class)
+Route::controller(KangarooPageController::class)
     ->group(function () {
-        Route::get('/', 'home');
+        Route::get('/', 'redirectToHomePage');
+        Route::get('/kangaroo', 'index')->name('kangaroo.home');
+        Route::get('/kangaroo/create', 'create');
+        Route::get('/kangaroo/modify', 'edit');
     });

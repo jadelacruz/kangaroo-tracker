@@ -6,6 +6,7 @@
 <body class="dx-viewport">
 
     @include('partials.nav')
+    @include('partials.breadcrumb')
 
     @yield('content')
 
