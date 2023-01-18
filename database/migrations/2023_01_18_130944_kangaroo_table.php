@@ -27,7 +27,8 @@ return new class extends Migration
             $oTable->float(KangarooConst::COL_WEIGHT);
             $oTable->float(KangarooConst::COL_HEIGHT);
             $oTable->enum(KangarooConst::COL_GENDER, array_column(Gender::cases(), 'value'));
-            $oTable->string(KangarooConst::COL_COLOR, 50);
+            $oTable->string(KangarooConst::COL_COLOR, 50)
+                ->nullable();
             $oTable->enum(KangarooConst::COL_NATURE, array_column(Nature::cases(), 'value'));
             $oTable->date(KangarooConst::COL_BIRTH_DATE);
             $oTable->softDeletes(KangarooConst::COL_DEDLETE_TS);

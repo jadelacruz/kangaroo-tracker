@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Constants\KangarooConstant as KangarooConst;
@@ -42,7 +43,10 @@ use App\Enums\Nature;
  */
 class Kangaroo extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    
+    /** @var string */
+    const DELETED_AT       = KangarooConst::COL_DEDLETE_TS;
 
     /** @var bool */
     public $timestamps     = false;
