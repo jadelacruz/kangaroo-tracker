@@ -1,5 +1,12 @@
-@extends('layouts.master')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @include('partials.head')
+</head>
+<body class="dx-viewport">
+
+    @include('partials.nav')
+    
     <div class="container">
         <div class="row">
 
@@ -28,4 +35,7 @@
 
         </div>
     </div>
-@endsection
+
+    @include('partials.script')
+</body>
+</html>

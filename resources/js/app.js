@@ -1,5 +1,3 @@
-import '../css/app.css';
-
 (() => {
     const customers = [{
         ID: 1,
