@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 
 /**
  * Class KangarooPageContropller
  */
-class KangarooPageController extends Controller
+class KangarooController extends Controller
 {
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
@@ -22,7 +23,7 @@ class KangarooPageController extends Controller
      */
     public function show()
     {
-
+        return Response::json(['test' => 'test']);
     }
 
     /**
