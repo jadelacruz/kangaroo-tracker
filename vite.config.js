@@ -6,7 +6,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/js/kangaroo/list.js'
+                'resources/js/kangaroo/list.js',
+                'resources/js/kangaroo/form.js'
             ],
             refresh: true,
         }),

@@ -29,7 +29,8 @@ return new class extends Migration
             $oTable->enum(KangarooConst::COL_GENDER, array_column(Gender::cases(), 'value'));
             $oTable->string(KangarooConst::COL_COLOR, 50)
                 ->nullable();
-            $oTable->enum(KangarooConst::COL_NATURE, array_column(Nature::cases(), 'value'));
+            $oTable->enum(KangarooConst::COL_NATURE, array_column(Nature::cases(), 'value'))
+                ->nullable();
             $oTable->date(KangarooConst::COL_BIRTH_DATE);
             $oTable->softDeletes(KangarooConst::COL_DEDLETE_TS);
             $oTable->datetime(KangarooConst::COL_INSERT_TS)

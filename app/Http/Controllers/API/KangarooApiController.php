@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\SaveKangarooRequest;
 use App\Services\KangarooService;
 use App\Http\Resources\KangarooCollection;
 use App\Http\Resources\KangarooResource;
@@ -48,16 +49,25 @@ class KangarooApiController
     /**
      * 
      */
-    // public function insert(): JsonResponse
-    // {
+    public function insert(SaveKangarooRequest $oRequest): JsonResponse
+    {
+        return Response::json($this->oService->insert($oRequest));
+    }
 
-    // }
+    /**
+     * 
+     */
+    public function update(int $iId, SaveKangarooRequest $oRequest): JsonResponse
+    {
+        return Response::json($this->oService->update($iId, $oRequest));
+    }
 
     /**
      * 
      */
     public function delete(int $iId): JsonResponse
     {
+        
         return Response::json($this->oService->delete($iId));
     }
 }

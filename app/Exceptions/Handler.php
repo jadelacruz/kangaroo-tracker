@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Http\Response\HttpErrorResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -52,15 +53,17 @@ class Handler extends ExceptionHandler
     /**
      * Handling error response for form request in JSON format
      */
-    // public function render($request, Throwable $e)
-    // {
-    //     $oRendered = parent::render($request, $e);
-    //     $mCode     = $e->getCode() === 0 ? $oRendered->getStatusCode() : $e->getCode();
-    //     Log::alert($e->getMessage(), $request->toArray());
-        
-    //     return response()->json([
-    //         'message'     => $e->getMessage(),
-    //         'status_code' => $mCode
-    //     ]);
-    // }
+    public function render($request, Throwable $e)
+    {
+        $sUri      = $request->route()->uri();
+        $oRendered = parent::render($request, $e);
+        $mCode     = $e->getCode() === 0 ? $oRendered->getStatusCode() : $e->getCode();
+        $sMessage  = $e->getMessage();
+        Log::alert($sMessage, $request->toArray());
+        if (str_contains($sUri, 'api') === true) {
+            return response()->json(HttpErrorResponse::create($sMessage, $mCode));
+        } else {
+            return view('error', compact('mCode', 'sMessage'));
+        }
+    }
 }

@@ -32,6 +32,6 @@
 @endsection
 
 @section('page-script')
-    <script type="text/javascript" 
+    <script type="module" 
             src="{{ Vite::asset('resources/js/kangaroo/list.js') }}"></script>
 @endsection

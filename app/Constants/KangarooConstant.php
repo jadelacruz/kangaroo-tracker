@@ -29,6 +29,10 @@ class KangarooConstant
 
     /** Messages */
     const MSG_NOT_FOUND      = 'No record match found.';
+    const MSG_INSERT_SUCCESS = 'Successfully created the record.';
+    const MSG_UPDATE_SUCCESS = 'Successfully updated the record.';
     const MSG_DELETE_SUCCESS = 'Successfully deleted the record.';
+    const MSG_INSERT_FAILED  = 'An error occured while trying to create the record';
+    const MSG_UPDATE_FAILED  = 'An error occured while trying to update the record';
     const MSG_DELETE_FAILED  = 'An error occured while trying to delete the record';
 }
