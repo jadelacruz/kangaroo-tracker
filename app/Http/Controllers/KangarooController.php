@@ -49,11 +49,6 @@ class KangarooController extends Controller
      */
     public function edit(Kangaroo $oKangaroo)
     {
-        try {
-            return view('kangaroo.form', compact('oKangaroo'));
-        } catch (ModelNotFoundException $e) {
-            return abort(404);
-        }
+        return view('kangaroo.form', compact('oKangaroo'));
     }
-    
 }

@@ -55,15 +55,14 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        $sUri      = $request->route()->uri();
         $oRendered = parent::render($request, $e);
         $mCode     = $e->getCode() === 0 ? $oRendered->getStatusCode() : $e->getCode();
         $sMessage  = $e->getMessage();
         Log::alert($sMessage, $request->toArray());
-        if (str_contains($sUri, 'api') === true) {
+        if ($request->is('api/*') === true) {
             return response()->json(HttpErrorResponse::create($sMessage, $mCode));
         } else {
-            return view('error', compact('mCode', 'sMessage'));
+            return parent::render($request, $e);
         }
     }
 }
