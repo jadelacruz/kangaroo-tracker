@@ -83,9 +83,9 @@
                          <option {{ empty($oKangaroo) ? 'selected' : '' }}
                                  value="">Open this select menu</option>
                          <option {{ data_get($oKangaroo, 'nature')?->isFriendly() ? 'selected' : ''}}
-                                 value="1">Friendly</option>
+                                 value="f">Friendly</option>
                          <option {{ data_get($oKangaroo, 'nature')?->isNotFriendly() ? 'selected' : ''}}
-                                 value="0">Not Friendly</option>
+                                 value="nf">Not Friendly</option>
                     </select>
                     <label for="recordNature">Friendliness</label>
                 </div>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 /**
  * Class KangarooPageContropller
  */
-class KangarooController extends Controller
+class KangarooController
 {
     /**
      * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory

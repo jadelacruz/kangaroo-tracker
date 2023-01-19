@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Interface\IRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class EloquentRepository implements IRepository
@@ -13,15 +14,14 @@ class EloquentRepository implements IRepository
     /**
      * @param string $sOrder
      * 
-     * @return array<int, array>
+     * @return Collection
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function getAll(string $sOrder = 'desc'): array
+    public function getAll(string $sOrder = 'desc'): Collection
     {
         return $this->oModel
             ->orderBy($this->oModel->getKeyName(), $sOrder)
-            ->get()
-            ->toArray();
+            ->get();
     }
 
     /**

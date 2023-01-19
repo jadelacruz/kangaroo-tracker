@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Constants\KangarooConstant as KangarooConst;
 use App\Enums\Gender;
 use App\Enums\Nature;
 use App\Models\Kangaroo;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\Foundation\Http\FormRequest;
 
 class SaveKangarooRequest extends FormRequest
 {
@@ -36,10 +36,12 @@ class SaveKangarooRequest extends FormRequest
                 'min:5',
                 'max:25',
                 Rule::unique(KangarooConst::DB_TABLE, KangarooConst::COL_NAME)
-                    ->ignore(Kangaroo::select(KangarooConst::COL_ID)
-                                ->whereName($this->get('name'))
-                                ->whereId($this->get('id'))
-                                ->first()?->id)
+                    ->ignore(
+                        Kangaroo::select(KangarooConst::COL_ID)
+                                ->whereName($this->get(KangarooConst::COL_NAME))
+                                ->whereId($this->get(KangarooConst::COL_ID))
+                                ->first()?->id
+                    )
             ],
             KangarooConst::COL_GENDER     => [
                 'required',

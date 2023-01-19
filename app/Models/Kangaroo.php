@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Constants\KangarooConstant as KangarooConst;
 use App\Enums\Gender;
 use App\Enums\Nature;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * App\Models\Kangaroo
@@ -41,6 +40,9 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereUpdTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereWeight($value)
  * @mixin \Eloquent
+ * @method static \Illuminate\Database\Query\Builder|Kangaroo onlyTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Kangaroo withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Kangaroo withoutTrashed()
  */
 class Kangaroo extends Model
 {

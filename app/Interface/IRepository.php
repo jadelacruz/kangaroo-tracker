@@ -5,9 +5,9 @@ namespace App\Interface;
 interface IRepository
 {
     /**
-     * @return array
+     * @return array|\Illuminate\Database\Eloquent\Collection
      */
-    public function getAll(string $sOrder): array;
+    public function getAll(string $sOrder);
 
     /**
      * @param int $iId

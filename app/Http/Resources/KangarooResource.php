@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Constants\KangarooConstant as KangarooConst;
-use App\Models\Kangaroo;
+use App\Enums\Nature;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class KangarooResource extends JsonResource
@@ -17,16 +17,15 @@ class KangarooResource extends JsonResource
     public function toArray($request)
     {
         return [
-            KangarooConst::COL_ID         => $this[KangarooConst::COL_ID],
-            KangarooConst::COL_NAME       => $this[KangarooConst::COL_NAME],
-            KangarooConst::COL_NICKNAME   => $this[KangarooConst::COL_NICKNAME],
-            KangarooConst::COL_WEIGHT     => $this[KangarooConst::COL_WEIGHT],
-            KangarooConst::COL_HEIGHT     => $this[KangarooConst::COL_HEIGHT],
-            KangarooConst::COL_GENDER     => KangarooConst::WORD_CAST_GENDER[ $this[KangarooConst::COL_GENDER] ],
-            KangarooConst::COL_COLOR      => $this[KangarooConst::COL_COLOR],
-            KangarooConst::COL_NATURE     => (empty($this[KangarooConst::COL_NATURE]) === true)
-                ? KangarooConst::WORD_CAST_NATURE_EMPTY : KangarooConst::WORD_CAST_NATURE[ $this[KangarooConst::COL_NATURE] ],
-            KangarooConst::COL_BIRTH_DATE => $this[KangarooConst::COL_BIRTH_DATE],
+            KangarooConst::COL_ID         => $this->id,
+            KangarooConst::COL_NAME       => $this->name,
+            KangarooConst::COL_NICKNAME   => $this->nickname,
+            KangarooConst::COL_WEIGHT     => $this->weight,
+            KangarooConst::COL_HEIGHT     => $this->height,
+            KangarooConst::COL_GENDER     => ucfirst(strtolower($this->gender->name)),
+            KangarooConst::COL_COLOR      => $this->color,
+            KangarooConst::COL_NATURE     => empty($this->nature) === true ? Nature::EMPTY_VALUE : $this->nature->castToWord(),
+            KangarooConst::COL_BIRTH_DATE => $this->birth_date,
         ];
     }
 }

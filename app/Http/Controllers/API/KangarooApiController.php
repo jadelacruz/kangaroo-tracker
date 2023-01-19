@@ -6,8 +6,6 @@ use App\Http\Requests\SaveKangarooRequest;
 use App\Services\KangarooService;
 use App\Http\Resources\KangarooCollection;
 use App\Http\Resources\KangarooResource;
-use App\Models\Kangaroo;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 
@@ -71,7 +69,6 @@ class KangarooApiController
      */
     public function delete(int $iId): JsonResponse
     {
-        
         return Response::json($this->oService->delete($iId));
     }
 }

@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum Gender: string
 {
-    case MALE = 'm';
-    case FEMALE = 'f';
+    case MALE       = 'm';
+    case FEMALE     = 'f';
 
     /**
      * @return bool
@@ -21,5 +21,13 @@ enum Gender: string
     public function isFemale(): bool
     {
         return $this === Gender::FEMALE;
+    }
+
+    /**
+     * @return string
+     */
+    public function castToWord(): string
+    {
+        return $this->name;
     }
 }

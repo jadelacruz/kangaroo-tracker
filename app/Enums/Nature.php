@@ -2,11 +2,14 @@
 
 namespace App\Enums;
 
-enum Nature: int
+enum Nature: string
 {
-    case FRIENDLY     = 1;
-    case NOT_FRIENDLY = 0;
+    case FRIENDLY      = 'f';
+    case NOT_FRIENDLY  = 'nf';
 
+    /** @var string */
+    const EMPTY_VALUE  = 'N/A';
+   
     /**
      * @return bool
      */
@@ -21,5 +24,13 @@ enum Nature: int
     public function isNotFriendly(): bool
     {
         return $this === Nature::NOT_FRIENDLY;
+    }
+
+    /**
+     * @return string
+     */
+    public function castToWord(): string
+    {
+        return $this === Nature::FRIENDLY ? 'Friendly': 'Not Friendly';
     }
 }

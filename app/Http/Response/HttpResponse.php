@@ -2,62 +2,57 @@
 
 namespace App\Http\Response;
 
-use App\Http\Response\HttpResponseField;
 use App\Constants\HttpStatusCode;
 
 class HttpResponse
 {
-    /**
-     * @var HttpResponse
+     /**
+     * @var string
      */
-    private static HttpResponse $instance;
+    const FIELD_MESSAGE = 'message';
 
     /**
      * @var string
      */
-    private string $message;
+    const FIELD_ERROR   = 'error';
 
     /**
-     * @var int
+     * @var string
      */
-    private int $status;
+    const FIELD_CODE    = 'code';
 
     /**
-     * @param string $message;
-     * @param int    $status
-     * 
+     * @var string
      */
-    private function __construct(string $message, int $status = HttpStatusCode::OK)
-    {
-        $this->message = $message;
-        $this->status  = $status;
-    }
+    const FIELD_DETAILS = 'details';
 
     /**
-     * @param string $message,
-     * @param int    $status
+     * @param string $sMessage,
+     * @param int    $sStatus
      * 
      * @return array<string, mixed>
      */
-    public static function create(string $message, int $status = HttpStatusCode::OK)
-    {
-        if (empty(self::$instance) === true) {
-            self::$instance = new self($message, $status);
-        }
-
-        return self::$instance->createResponse();
-    }
-
-    /**
-     * Create the Error response format
-     * 
-     * @return array<string, mixed>
-     */
-    private function createResponse()
+    public static function create(string $sMessage, int $sStatus = HttpStatusCode::OK)
     {
         return [
-            HttpResponseField::FIELD_MESSAGE => $this->message,
-            HttpResponseField::FIELD_CODE    => $this->status
+            self::FIELD_MESSAGE => $sMessage,
+            self::FIELD_CODE    => $sStatus
+        ];
+    }
+
+    /**
+     * @param string $sMessage
+     * @param int    $sStatus
+     * 
+     * @return array<string, mixed>
+     */
+    public static function createError(string $sMessage, int $sStatus = HttpStatusCode::BAD_REQUEST)
+    {
+        return [
+            self::FIELD_ERROR => [
+                self::FIELD_MESSAGE => $sMessage,
+                self::FIELD_CODE    => $sStatus
+            ]
         ];
     }
 }
