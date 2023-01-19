@@ -16,11 +16,11 @@ const dataGridConfiguration = (keyId, dataSource, events) => {
             },
             { 
                 dataField: 'weight',
-                caption: 'Weight'
+                caption: 'Weight (kg)'
             },
             { 
                 dataField: 'height',
-                caption: 'Height'
+                caption: 'Height (inches)'
             },
             { 
                 dataField: 'nature',

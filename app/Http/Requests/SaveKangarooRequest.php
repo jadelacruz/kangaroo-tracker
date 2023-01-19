@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use App\Constants\KangarooConstant as KangarooConst;
 use App\Enums\Gender;
 use App\Enums\Nature;
+use App\Models\Kangaroo;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
 class SaveKangarooRequest extends FormRequest
@@ -33,7 +35,11 @@ class SaveKangarooRequest extends FormRequest
                 'string',
                 'min:5',
                 'max:25',
-                'unique:App\Models\Kangaroo,name',
+                Rule::unique(KangarooConst::DB_TABLE, KangarooConst::COL_NAME)
+                    ->ignore(Kangaroo::select(KangarooConst::COL_ID)
+                                ->whereName($this->get('name'))
+                                ->whereId($this->get('id'))
+                                ->first()?->id)
             ],
             KangarooConst::COL_GENDER     => [
                 'required',
@@ -44,8 +50,8 @@ class SaveKangarooRequest extends FormRequest
                 new Enum(Nature::class)
             ],
             KangarooConst::COL_NICKNAME   => 'nullable|min:5|max:10',
-            KangarooConst::COL_WEIGHT     => 'required|numeric',
-            KangarooConst::COL_HEIGHT     => 'required|numeric',
+            KangarooConst::COL_WEIGHT     => 'required|numeric|min:1',
+            KangarooConst::COL_HEIGHT     => 'required|numeric|min:1',
             KangarooConst::COL_COLOR      => 'nullable|min:2|max:50',
             KangarooConst::COL_BIRTH_DATE => 'required|date'
         ];

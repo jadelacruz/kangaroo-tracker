@@ -34,15 +34,10 @@ import dataGridConfiguration from './data.grid';
 
         initilizeDataGrid: async function () {
             await this.getRecords();
-            this.dom
-                .gridContainer
+            this.data.selectedRow = null;
+            this.dom.gridContainer
                 .dxDataGrid(
-                    dataGridConfiguration(
-                        'id', 
-                        this.data.kangaroos, 
-                        { 
-                            onSelectionChanged: this.dataGridOnChange.bind(this)
-                        })
+                    dataGridConfiguration('id', this.data.kangaroos, { onSelectionChanged: this.dataGridOnChange.bind(this) })
                 );
         },
 
@@ -54,10 +49,10 @@ import dataGridConfiguration from './data.grid';
 
         getRecords: async function () {
             try {
-            this.data.kangaroos = await kangarooRest.getAll();
+                this.data.kangaroos = await kangarooRest.getAll();
             } catch (e) {
-            alert('An error occured while trying to get the records.');
-            console.error(e);
+                alert('An error occured while trying to get the records.');
+                console.error(e);
             }
         },
 
@@ -77,7 +72,7 @@ import dataGridConfiguration from './data.grid';
 
             const { name, id } = this.data.selectedRow;
             if (confirm(`Do you want to update the record of ${name}?`)) {
-            location.replace(this.routes.update + id);
+                location.replace(this.routes.update + id);
             }
         },
 

@@ -49,7 +49,8 @@ import kangarooRest from '../rest/kangaroo';
         saveClicked: async function (e) {
             e.preventDefault();
             if (confirm('Are you sure you want to create this record?') === false) return;
-            let response, message;
+
+            let response;
             const data = this.prepareData();
             try {
                 if (!data.hasOwnProperty('id')) { // add
@@ -57,9 +58,13 @@ import kangarooRest from '../rest/kangaroo';
                 } else { // update
                     response = await kangarooRest.update(data.id, data);
                 }
+                
+                if (response?.error) {
+                    alert(response.error.message);
+                    return
+                }
 
-                message = response?.error?.message || response?.message;
-                alert(message);
+                alert(response.message);
                 location.replace('/kangaroo');
             } catch (e) {
                 alert('An error occured while trying to save the record;')
