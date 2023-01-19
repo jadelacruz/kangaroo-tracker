@@ -95,6 +95,7 @@
                            type="date"
                            class="form-control"
                            placeholder="Enter brithday here"
+                           max="{{ Carbon\Carbon::now()->format('Y-m-d') }}"
                            value="{{ data_get($oKangaroo, 'birth_date') }}">
                     <label for="recordBirthDate" 
                            class="form-label">*Birthday</label>

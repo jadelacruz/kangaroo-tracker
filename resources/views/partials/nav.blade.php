@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand text-logo" 
-         href="https://www.vokke.com.au/">Vokke - Pet Tracker</a>
+         href="https://www.vokke.com.au/"
+         target="__blank">Vokke - Pet Tracker</a>
       <button class="navbar-toggler" 
               type="button" 
               data-bs-toggle="collapse" 

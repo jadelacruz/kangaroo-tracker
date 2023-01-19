@@ -7,11 +7,6 @@ class HttpResponseField
     /**
      * @var string
      */
-    const FIELD_DATA    = 'data';
-
-    /**
-     * @var string
-     */
     const FIELD_MESSAGE = 'message';
 
     /**

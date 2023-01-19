@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kangaroo;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Response;
 
 /**
  * Class KangarooPageContropller
@@ -21,15 +19,7 @@ class KangarooController extends Controller
     }
 
     /**
-     * 
-     */
-    public function show()
-    {
-        return Response::json(['test' => 'test']);
-    }
-
-    /**
-     * 
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirectToHomePage()
     {
@@ -45,7 +35,7 @@ class KangarooController extends Controller
     }
 
     /**
-     * 
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory
      */
     public function edit(Kangaroo $oKangaroo)
     {

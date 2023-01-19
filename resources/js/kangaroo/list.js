@@ -58,10 +58,7 @@ import dataGridConfiguration from './data.grid';
 
         addClicked: function (e) {
             e.preventDefault();
-
-            if (confirm('Do you want to add new record?')) {
-                location.replace(this.routes.create);
-            }
+            location.replace(this.routes.create);
         },
         
         updateClicked: function (e) {

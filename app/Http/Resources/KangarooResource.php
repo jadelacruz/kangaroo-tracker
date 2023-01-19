@@ -24,7 +24,7 @@ class KangarooResource extends JsonResource
             KangarooConst::COL_HEIGHT     => $this[KangarooConst::COL_HEIGHT],
             KangarooConst::COL_GENDER     => KangarooConst::WORD_CAST_GENDER[ $this[KangarooConst::COL_GENDER] ],
             KangarooConst::COL_COLOR      => $this[KangarooConst::COL_COLOR],
-            KangarooConst::COL_NATURE     => empty($this[KangarooConst::COL_NATURE]) 
+            KangarooConst::COL_NATURE     => (empty($this[KangarooConst::COL_NATURE]) === true)
                 ? KangarooConst::WORD_CAST_NATURE_EMPTY : KangarooConst::WORD_CAST_NATURE[ $this[KangarooConst::COL_NATURE] ],
             KangarooConst::COL_BIRTH_DATE => $this[KangarooConst::COL_BIRTH_DATE],
         ];
