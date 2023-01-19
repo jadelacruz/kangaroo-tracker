@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Services\KangarooService;
 use App\Http\Resources\KangarooCollection;
 use App\Http\Resources\KangarooResource;
+use App\Models\Kangaroo;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
@@ -42,5 +43,21 @@ class KangarooApiController
         } catch (ModelNotFoundException $e) {
             return Response::json(['notfound' => 404], 404);
         }
+    }
+
+    /**
+     * 
+     */
+    // public function insert(): JsonResponse
+    // {
+
+    // }
+
+    /**
+     * 
+     */
+    public function delete(int $iId): JsonResponse
+    {
+        return Response::json($this->oService->delete($iId));
     }
 }

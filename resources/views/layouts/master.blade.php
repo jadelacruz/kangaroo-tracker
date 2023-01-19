@@ -9,8 +9,8 @@
     @include('partials.breadcrumb')
 
     @yield('content')
-
+    
     @include('partials.script')
-
+    @yield('page-script')
 </body>
 </html>

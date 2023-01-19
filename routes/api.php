@@ -23,5 +23,5 @@ Route::controller(KangarooApiController::class)
         Route::get('/{iId}', 'getById');
         Route::post('/', 'insert');
         Route::put('/{iId}', 'update');
-        Route::delete('{iId}', 'destroy');
+        Route::delete('{iId}', 'delete');
     });
