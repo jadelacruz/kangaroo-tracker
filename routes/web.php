@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\KangarooConstant;
 use App\Http\Controllers\KangarooController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', [KangarooController::class, 'redirectToHomePage']);
+
 Route::controller(KangarooController::class)
+    ->prefix(KangarooConstant::ROUTE_PREFIX)
     ->group(function () {
-        Route::get('/', 'redirectToHomePage');
-        Route::get('/kangaroo', 'index')->name('kangaroo.home');
-        Route::get('/kangaroo/create', 'create');
-        Route::get('/kangaroo/modify', 'edit');
+        Route::get('/', 'index')->name('kangaroo.home');
+        Route::get('/create', 'create');
+        Route::get('/edit/{oKangaroo}', 'edit');
     });

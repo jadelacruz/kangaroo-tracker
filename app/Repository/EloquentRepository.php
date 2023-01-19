@@ -12,6 +12,7 @@ class EloquentRepository implements IRepository
 
     /**
      * @return array<int, array>
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function getAll(): array
     {
@@ -23,7 +24,7 @@ class EloquentRepository implements IRepository
      */
     public function getOne(int $iId): ?object
     {
-        return $this->oModel->find($iId);
+        return $this->oModel->findOrfail($iId);
     }
 
     /**
@@ -41,6 +42,7 @@ class EloquentRepository implements IRepository
      * @param Model|array $aData
      * 
      * @return bool
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function update(int $iId, array $aData): bool
     {
@@ -53,6 +55,7 @@ class EloquentRepository implements IRepository
      * @param int $iId
      * 
      * @return bool
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
     public function delete(int $iId): bool
     {

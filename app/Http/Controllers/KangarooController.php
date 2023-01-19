@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kangaroo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 
@@ -45,10 +47,13 @@ class KangarooController extends Controller
     /**
      * 
      */
-    public function edit()
+    public function edit(Kangaroo $oKangaroo)
     {
-        
+        try {
+            return view('kangaroo.form', compact('oKangaroo'));
+        } catch (ModelNotFoundException $e) {
+            return abort(404);
+        }
     }
-
     
 }

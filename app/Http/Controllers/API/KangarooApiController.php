@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Services\KangarooService;
 use App\Http\Resources\KangarooCollection;
 use App\Http\Resources\KangarooResource;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 
@@ -36,6 +37,10 @@ class KangarooApiController
      */
     public function getById(int $iId): JsonResponse
     {
-        return Response::json(new KangarooResource($this->oService->getById($iId)), 200);
+        try {
+            return Response::json(new KangarooResource($this->oService->getById($iId)), 200);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(['notfound' => 404], 404);
+        }
     }
 }

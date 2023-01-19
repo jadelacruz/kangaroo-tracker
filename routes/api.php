@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\API\KangarooApiController;
+use App\Constants\KangarooConstant;
+use App\Http\Controllers\Api\KangarooApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::controller(KangarooApiController::class)
-    ->prefix('kangaroo')
+    ->prefix(KangarooConstant::ROUTE_PREFIX)
     ->group(function () {
         Route::get('/', 'getAll');
         Route::get('/{iId}', 'getById');
