@@ -29,14 +29,14 @@ import kangarooRest from '../rest/kangaroo';
         prepareData: function () {
             const { dom } = this; 
             const data    = {
-                name: dom.txtName.val(),
-                nickname: dom.txtNickname.val(),
-                weight: dom.txtWeight.val(),
-                height: dom.txtHeight.val(),
-                color: dom.txtColor.val(),
+                name      : dom.txtName.val(),
+                nickname  : dom.txtNickname.val(),
+                weight    : dom.txtWeight.val(),
+                height    : dom.txtHeight.val(),
+                color     : dom.txtColor.val(),
                 birth_date: dom.txtBirthDate.val(),
-                gender: dom.selGender.val(),
-                nature: dom.selNature.val()
+                gender    : dom.selGender.val(),
+                nature    : dom.selNature.val()
             };
 
             if (dom.txtId.length === 1) {
@@ -49,23 +49,22 @@ import kangarooRest from '../rest/kangaroo';
         saveClicked: async function (e) {
             e.preventDefault();
             if (confirm('Are you sure you want to create this record?') === false) return;
+            let response, message;
             const data = this.prepareData();
-
             try {
                 if (!data.hasOwnProperty('id')) { // add
-                    const { code } = await kangarooRest.insert(data);
+                    response = await kangarooRest.insert(data);
                 } else { // update
-                    const { code } = await kangarooRest.update(data.id, data);
+                    response = await kangarooRest.update(data.id, data);
                 }
+
+                message = response?.error?.message || response?.message;
+                alert(message);
+                location.replace('/kangaroo');
             } catch (e) {
                 alert('An error occured while trying to save the record;')
                 console.error(e);
             }
-
-            if (status_code === 200) {
-                alert('Successfully save the record.');
-            }
-
         },
 
         cancelClicked: function (e) {

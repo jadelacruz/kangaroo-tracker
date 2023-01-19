@@ -11,12 +11,17 @@ class EloquentRepository implements IRepository
     protected Model $oModel;
 
     /**
+     * @param string $sOrder
+     * 
      * @return array<int, array>
      * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
      */
-    public function getAll(): array
+    public function getAll(string $sOrder = 'desc'): array
     {
-        return $this->oModel->get()->toArray();
+        return $this->oModel
+            ->orderBy($this->oModel->getKeyName(), $sOrder)
+            ->get()
+            ->toArray();
     }
 
     /**

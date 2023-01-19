@@ -7,7 +7,7 @@ interface IRepository
     /**
      * @return array
      */
-    public function getAll(): array;
+    public function getAll(string $sOrder): array;
 
     /**
      * @param int $iId

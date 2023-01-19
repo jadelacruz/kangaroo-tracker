@@ -65,7 +65,7 @@ class KangarooService
     public function update(int $iId, Request $oRequest): array
     {
         try {
-            $this->oRepository->getOne($iId);
+            $this->oRepository->update($iId, $oRequest->all());
             return HttpResponse::create(KangarooConst::MSG_UPDATE_SUCCESS, HttpStatusCode::OK);
         } catch (ModelNotFoundException $e) {
             return HttpErrorResponse::create(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
@@ -89,10 +89,10 @@ class KangarooService
             if ($bResult === true) {
                 return HttpResponse::create(KangarooConst::MSG_DELETE_SUCCESS, HttpStatusCode::OK);
             }
-        } catch (ModelNotFoundException $oException) {
+        } catch (ModelNotFoundException $e) {
             return HttpErrorResponse::create(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
         } catch (QueryException $e) {
-            Log::alert($e->getMessage(), $oRequest->all());
+            Log::alert($e->getMessage(), $iId);
             return HttpErrorResponse::create(KangarooConst::MSG_DELETE_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }

@@ -39,15 +39,14 @@ class KangarooApiController
      */
     public function getById(int $iId): JsonResponse
     {
-        try {
-            return Response::json(new KangarooResource($this->oService->getById($iId)), 200);
-        } catch (ModelNotFoundException $e) {
-            return Response::json(['notfound' => 404], 404);
-        }
+        return Response::json(new KangarooResource($this->oService->getById($iId)), 200);
     }
 
     /**
      * 
+     * @param SaveKangarooRequest $oRequest
+     * 
+     * @return JsonResponse
      */
     public function insert(SaveKangarooRequest $oRequest): JsonResponse
     {
@@ -55,7 +54,10 @@ class KangarooApiController
     }
 
     /**
+     * @param int $iId
+     * @param SaveKangarooRequest $oRequest
      * 
+     * @return JsonResponse
      */
     public function update(int $iId, SaveKangarooRequest $oRequest): JsonResponse
     {
@@ -63,7 +65,9 @@ class KangarooApiController
     }
 
     /**
+     * @param int $iId
      * 
+     * @return JsonResponse
      */
     public function delete(int $iId): JsonResponse
     {

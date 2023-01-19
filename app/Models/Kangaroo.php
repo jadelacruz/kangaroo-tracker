@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Constants\KangarooConstant as KangarooConst;
 use App\Enums\Gender;
 use App\Enums\Nature;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * App\Models\Kangaroo
@@ -72,6 +73,6 @@ class Kangaroo extends Model
     /** @var array<string, string> */
     protected $casts       = [
         KangarooConst::COL_GENDER => Gender::class,
-        KangarooConst::COL_NATURE => Nature::class
+        KangarooConst::COL_NATURE => Nature::class,
     ];
 }
