@@ -77,6 +77,7 @@ import dataGridConfiguration from './data.grid';
             e.preventDefault();
             if (!this.data.selectedRow) {
                 alert('Please select from the table which record to delete.');
+                return;
             }
 
             const { name, id } = this.data.selectedRow;
