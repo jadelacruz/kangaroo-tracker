@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Constants\KangarooConstant;
+use App\Http\Controllers\Api\KangarooApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+Route::controller(KangarooApiController::class)
+    ->prefix(KangarooConstant::ROUTE_PREFIX)
+    ->group(function () {
+        Route::get('/', 'getAll');
+        Route::get('/{iId}', 'getById');
+        Route::post('/', 'insert');
+        Route::put('/{iId}', 'update');
+        Route::delete('{iId}', 'delete');
+    });
