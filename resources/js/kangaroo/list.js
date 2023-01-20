@@ -1,5 +1,5 @@
 'use strict';
-import kangarooRest from "../rest/kangaroo";
+import kangarooRest from '../rest/kangaroo.rest';
 import dataGridConfiguration from './data.grid';
 
 (function () {
@@ -8,7 +8,7 @@ import dataGridConfiguration from './data.grid';
             gridContainer: $('#gridContainer'),
             btnAdd       : $('#btnAdd'),
             btnUpdate    : $('#btnUpdate'),
-            btnDedlete   : $('#btnDelete')
+            btnDelete    : $('#btnDelete')
         },
 
         routes: {
@@ -19,20 +19,20 @@ import dataGridConfiguration from './data.grid';
         data: {
             kangaroos  : [],
             selectedRow: null,
-          },
+        },
 
         init: function () {
             this.bindEventListeners();
-            this.initilizeDataGrid();
+            this.loadDataGrid();
         },
 
         bindEventListeners: function () {
             this.dom.btnAdd.click(this.addClicked.bind(this));
             this.dom.btnUpdate.click(this.updateClicked.bind(this));
-            this.dom.btnDedlete.click(this.deleteClicked.bind(this));
+            this.dom.btnDelete.click(this.deleteClicked.bind(this));
         },
 
-        initilizeDataGrid: async function () {
+        loadDataGrid: async function () {
             await this.getRecords();
             this.data.selectedRow = null;
             this.dom.gridContainer
@@ -42,8 +42,8 @@ import dataGridConfiguration from './data.grid';
         },
 
         dataGridOnChange: function ({ selectedRowsData }) {
-            if (selectedRowsData[0]) {
-                this.data.selectedRow = selectedRowsData[0];
+            if (selectedRowsData.length !== 0) {
+                this.data.selectedRow = selectedRowsData.pop();
             }
         },
 
@@ -51,8 +51,7 @@ import dataGridConfiguration from './data.grid';
             try {
                 this.data.kangaroos = await kangarooRest.getAll();
             } catch (e) {
-                alert('An error occured while trying to get the records.');
-                console.error(e);
+                alert('An error occurred while trying to get the records.');
             }
         },
 
@@ -60,16 +59,18 @@ import dataGridConfiguration from './data.grid';
             e.preventDefault();
             location.replace(this.routes.create);
         },
-        
+
         updateClicked: function (e) {
             e.preventDefault();
-            if (!this.data.selectedRow) {
+            const { selectedRow } = this.data;
+
+            if (!selectedRow) {
                 alert('Please select from the table which record to update.');
+                return;
             }
 
-            const { name, id } = this.data.selectedRow;
-            if (confirm(`Do you want to update the record of ${name}?`)) {
-                location.replace(this.routes.update + id);
+            if (confirm(`Do you want to update the record of ${selectedRow.name}?`)) {
+                location.replace(this.routes.update + selectedRow.id);
             }
         },
 
@@ -77,7 +78,7 @@ import dataGridConfiguration from './data.grid';
             e.preventDefault();
             if (!this.data.selectedRow) {
                 alert('Please select from the table which record to delete.');
-            } 
+            }
 
             const { name, id } = this.data.selectedRow;
             if (confirm(`Do you want to delete the record of ${name}?`)) {
@@ -85,10 +86,9 @@ import dataGridConfiguration from './data.grid';
                     const response = await kangarooRest.delete(id);
                     const message  = response?.error?.message || response?.message;
                     alert(message);
-                    this.initilizeDataGrid();
+                    this.loadDataGrid();
                 } catch (e) {
-                    alert('An error occured while trying to delete the record.');
-                    console.error(e);
+                    alert('An error occurred while trying to delete the record.');
                 }
             }
 

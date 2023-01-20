@@ -1,5 +1,5 @@
 'use strict';
-import kangarooRest from '../rest/kangaroo';
+import kangarooRest from '../rest/kangaroo.rest';
 
 (function () {
     const kangarooFormPage = {
@@ -17,6 +17,12 @@ import kangarooRest from '../rest/kangaroo';
             btnCancel   : $('#btnCancel')
         },
 
+        routes: {
+            list: '/kangaroo'
+        },
+
+        restOperation: 'insert',
+
         init: function () {
             this.bindEventListener();
         },
@@ -27,7 +33,7 @@ import kangarooRest from '../rest/kangaroo';
         },
 
         prepareData: function () {
-            const { dom } = this; 
+            const { dom } = this;
             const data    = {
                 name      : dom.txtName.val(),
                 nickname  : dom.txtNickname.val(),
@@ -41,6 +47,7 @@ import kangarooRest from '../rest/kangaroo';
 
             if (dom.txtId.length === 1) {
                 data.id = dom.txtId.val();
+                this.restOperation = 'update';
             }
 
             return data;
@@ -50,32 +57,26 @@ import kangarooRest from '../rest/kangaroo';
             e.preventDefault();
             if (confirm('Are you sure you want to create this record?') === false) return;
 
-            let response;
-            const data = this.prepareData();
             try {
-                if (!data.hasOwnProperty('id')) { // add
-                    response = await kangarooRest.insert(data);
-                } else { // update
-                    response = await kangarooRest.update(data.id, data);
-                }
-                
+                const data     = this.prepareData();
+                const response = await kangarooRest[this.restOperation](data);
+
                 if (response?.error) {
                     alert(response.error.message);
-                    return
+                    return;
                 }
 
                 alert(response.message);
-                location.replace('/kangaroo');
+                location.replace(this.routes.list);
             } catch (e) {
-                alert('An error occured while trying to save the record;')
-                console.error(e);
+                alert('An error occurred while trying to save the record');
             }
         },
 
         cancelClicked: function (e) {
             e.preventDefault();
             if (confirm('Do you really want to cancel? Cancelling will return you to List page.')) {
-                location.replace('/kangaroo');
+                location.replace(this.routes.list);
             }
         }
 

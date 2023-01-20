@@ -4,8 +4,8 @@ const dataGridConfiguration = (keyId, dataSource, events) => {
     return {
         ...events,
         dataSource: dataSource,
-        keyExpr: keyId,
-        columns: [
+        keyExpr   : keyId,
+        columns   : [
             { 
                 dataField: 'name',
                 caption: 'Name'

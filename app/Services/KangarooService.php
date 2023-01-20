@@ -3,15 +3,16 @@
 namespace App\Services;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 use App\Constants\HttpStatusCode;
-use App\Http\Response\HttpResponse;
 use App\Interface\IRepository;
 use App\Models\Kangaroo;
 use App\Constants\KangarooConstant as KangarooConst;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use App\Http\Response;
+
 
 class KangarooService
 {
@@ -45,16 +46,16 @@ class KangarooService
     /**
      * @param Request|\App\Http\Requests\SaveKangarooRequest $oRequest
      * 
-     * @return array<string, mixed>
+     * @return Response
      */
-    public function insert(Request $oRequest): array
+    public function insert(Request $oRequest): Response
     {
         try {
             $this->oRepository->insert($oRequest->all());
-            return HttpResponse::create(KangarooConst::MSG_INSERT_SUCCESS, HttpStatusCode::OK);
+            return Response::create(KangarooConst::MSG_INSERT_SUCCESS);
         } catch (QueryException $e) {
             Log::alert($e->getMessage(), $oRequest->all());
-            return HttpResponse::createError(KangarooConst::MSG_INSERT_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
+            return Response::create(KangarooConst::MSG_INSERT_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -63,18 +64,18 @@ class KangarooService
      * @param int                                            $iId
      * @param Request|\App\Http\Requests\SaveKangarooRequest $oRequest
      * 
-     * @return array<string, mixed>
+     * @return Response
      */
-    public function update(int $iId, Request $oRequest): array
+    public function update(int $iId, Request $oRequest): Response
     {
         try {
             $this->oRepository->update($iId, $oRequest->all());
-            return HttpResponse::create(KangarooConst::MSG_UPDATE_SUCCESS, HttpStatusCode::OK);
+            return Response::create(KangarooConst::MSG_UPDATE_SUCCESS, HttpStatusCode::OK);
         } catch (ModelNotFoundException $e) {
-            return HttpResponse::createError(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
+            return Response::create(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
         } catch (QueryException $e) {
             Log::alert($e->getMessage(), $oRequest->all());
-            return HttpResponse::createError(KangarooConst::MSG_UPDATE_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
+            return Response(KangarooConst::MSG_UPDATE_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -82,19 +83,19 @@ class KangarooService
      * 
      * @param int $iId
      * 
-     * @return array<string, mixed>
+     * @return Response
      * 
      */
-    public function delete(int $iId): array
+    public function delete(int $iId): Response
     {
         try {
             $this->oRepository->delete($iId);
-            return HttpResponse::create(KangarooConst::MSG_DELETE_SUCCESS, HttpStatusCode::OK);
+            return Response::create(KangarooConst::MSG_DELETE_SUCCESS, HttpStatusCode::OK);
         } catch (ModelNotFoundException $e) {
-            return HttpResponse::createError(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
+            return Response::create(KangarooConst::MSG_NOT_FOUND, HttpStatusCode::NOT_FOUND);
         } catch (QueryException $e) {
             Log::alert($e->getMessage(), $iId);
-            return HttpResponse::createError(KangarooConst::MSG_DELETE_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
+            return Response::create(KangarooConst::MSG_DELETE_FAILED, HttpStatusCode::INTERNAL_SERVER_ERROR);
         }
     }
 

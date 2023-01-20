@@ -8,20 +8,12 @@ $.ajaxSetup({
 
 const kangarooRest = {
     route   : '/api/kangaroo',
-    dataType: 'json', 
 
     getAll : function () {
         return $.ajax({
             url     : this.route,
-            dataType: this.dataType
-        });
-    },
+            dataType: 'json',
 
-    getById: function () {
-        return $.ajax({
-            url     : this.route,
-            method  : 'GET',
-            dataType: this.dataType
         });
     },
 
@@ -30,16 +22,18 @@ const kangarooRest = {
             url     : this.route,
             method  : 'POST',
             data    : data,
-            dataType: this.dataType
+            dataType: 'json',
+
         });
     },
 
-    update: function (id, data) {
+    update: function (data) {
         return $.ajax({
-            url     : this.route + `/${id}`,
+            url     : this.route + `/${data.id}`,
             method  : 'PUT',
             data    : data,
-            dataType: this.dataType
+            dataType: 'json',
+
         });
     },
 
@@ -47,7 +41,7 @@ const kangarooRest = {
         return $.ajax({
             url     : this.route + `/${id}`,
             method  : 'DELETE',
-            dataType: this.dataType
+            dataType: 'json',
         });
     }
 

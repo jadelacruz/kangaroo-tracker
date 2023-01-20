@@ -2,9 +2,9 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use App\Constants\KangarooConstant as KangarooConst;
 use App\Enums\Nature;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class KangarooResource extends JsonResource
 {

@@ -1,14 +1,14 @@
 @extends('layouts.master')
 
 @php
-    if (!isset($oKangaroo)) $oKangaroo = null;
+    if ( !isset($oKangaroo) ) $oKangaroo = null;
 @endphp
 
 @section('content')
     <div class="container">
         <div class="row form-bg">
             <form>
-                @if (!empty($oKangaroo))
+                @if ( !empty($oKangaroo) )
                 <input id="recordId"
                        type="text"
                        hidden="hidden"
@@ -104,7 +104,7 @@
 
                 <button id="btnSave"
                         type="button" 
-                        class="btn btn-success">Save <i class="fa fa-check"></i></i></button>
+                        class="btn btn-success">Save <i class="fa fa-check"></i></button>
                 <button id="btnCancel"
                         type="button" 
                         class="btn btn-danger">Cancel <i class="fa fa-times"></i></button>

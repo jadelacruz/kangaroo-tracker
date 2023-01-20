@@ -36,12 +36,10 @@ class SaveKangarooRequest extends FormRequest
                 'min:5',
                 'max:25',
                 Rule::unique(KangarooConst::DB_TABLE, KangarooConst::COL_NAME)
-                    ->ignore(
-                        Kangaroo::select(KangarooConst::COL_ID)
+                    ->ignore(Kangaroo::select(KangarooConst::COL_ID)
                                 ->whereName($this->get(KangarooConst::COL_NAME))
                                 ->whereId($this->get(KangarooConst::COL_ID))
-                                ->first()?->id
-                    )
+                                ->first()?->id)
             ],
             KangarooConst::COL_GENDER     => [
                 'required',

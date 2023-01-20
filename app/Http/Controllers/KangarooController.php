@@ -6,7 +6,7 @@ use App\Models\Kangaroo;
 use Illuminate\Support\Facades\Redirect;
 
 /**
- * Class KangarooPageContropller
+ * Class KangarooPageController
  */
 class KangarooController
 {

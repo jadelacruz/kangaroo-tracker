@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Http\Response\HttpResponse;
+use App\Http\Response;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -61,7 +61,7 @@ class Handler extends ExceptionHandler
 
         if ($request->is('api/*') === true) {
             Log::alert($sMessage, $request->toArray());
-            return response()->json(HttpResponse::createError($sMessage, $mCode));
+            return response()->json(Response::create($sMessage, $mCode));
         } 
 
         return parent::render($request, $e);

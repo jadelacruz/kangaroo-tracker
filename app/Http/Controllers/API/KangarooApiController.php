@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Constants\HttpStatusCode;
 use App\Http\Requests\SaveKangarooRequest;
 use App\Services\KangarooService;
 use App\Http\Resources\KangarooCollection;
@@ -27,7 +28,7 @@ class KangarooApiController
      */
     public function getAll(): JsonResponse
     {
-        return Response::json(new KangarooCollection($this->oService->getList()), 200);
+        return Response::json(new KangarooCollection($this->oService->getList()), HttpStatusCode::OK);
     }
 
     /**
@@ -37,7 +38,7 @@ class KangarooApiController
      */
     public function getById(int $iId): JsonResponse
     {
-        return Response::json(new KangarooResource($this->oService->getById($iId)), 200);
+        return Response::json(new KangarooResource($this->oService->getById($iId)), HttpStatusCode::OK);
     }
 
     /**
