@@ -8,6 +8,7 @@
     - [Database Setup](#database-setup)
         - [Laravel Migration](#laravel-migration)
         - [SQL Dump](#sql-dump)
+- [Running the Project](#running-the-project)
 - [Authors](#authors)
 
 ## Introduction
