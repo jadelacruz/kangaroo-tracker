@@ -1,4 +1,4 @@
-<title> Vokke - Kangaroo Tracker</title>
+<title> {{ config('app.name') }}</title>
 
 <meta http-equiv="X-UA-Compatible" 
       content="IE=edge" />
