@@ -1,5 +1,10 @@
 'use strict';
+
 import kangarooRest from '../rest/kangaroo.rest';
+import kangarooSchema from '../validations/kangaroo.schema';
+import Validator from 'validatorjs';
+import en from 'validatorjs/src/lang/en';
+
 
 (function () {
     const kangarooFormPage = {
@@ -24,6 +29,7 @@ import kangarooRest from '../rest/kangaroo.rest';
         restOperation: 'insert',
 
         init: function () {
+            Validator.setMessages('en', en);
             this.bindEventListener();
         },
 
@@ -46,8 +52,21 @@ import kangarooRest from '../rest/kangaroo.rest';
             };
 
             if (dom.txtId.length === 1) {
-                data.id = dom.txtId.val();
+                data.id            = dom.txtId.val();
                 this.restOperation = 'update';
+            }
+
+            return this.validateData(data);
+        },
+
+        validateData: function(data) {
+            const validation = new Validator(data, kangarooSchema);
+
+            if (validation.passes() === false) {
+                const { errors } = validation;
+                const errorField = Object.keys(errors.all()).pop();
+                alert(errors.first(errorField));
+                return false;
             }
 
             return data;
@@ -57,10 +76,11 @@ import kangarooRest from '../rest/kangaroo.rest';
             e.preventDefault();
             if (confirm('Are you sure you want to create this record?') === false) return;
 
-            try {
-                const data     = this.prepareData();
-                const response = await kangarooRest[this.restOperation](data);
+            const data = this.prepareData();
+            if (data === false) return;
 
+            try {
+                const response   = await kangarooRest[this.restOperation](data);
                 if (response?.error) {
                     alert(response.error.message);
                     return;
@@ -72,6 +92,7 @@ import kangarooRest from '../rest/kangaroo.rest';
                 alert('An error occurred while trying to save the record');
             }
         },
+
 
         cancelClicked: function (e) {
             e.preventDefault();
