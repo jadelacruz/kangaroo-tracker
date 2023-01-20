@@ -93,7 +93,6 @@ import en from 'validatorjs/src/lang/en';
             }
         },
 
-
         cancelClicked: function (e) {
             e.preventDefault();
             if (confirm('Do you really want to cancel? Cancelling will return you to List page.')) {
