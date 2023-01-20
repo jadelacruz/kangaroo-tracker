@@ -34,7 +34,6 @@ import dataGridConfiguration from './data.grid';
 
         loadDataGrid: async function () {
             await this.getRecords();
-            this.data.selectedRow = null;
             this.dom.gridContainer
                 .dxDataGrid(
                     dataGridConfiguration('id', this.data.kangaroos, { onSelectionChanged: this.dataGridOnChange.bind(this) })
@@ -83,6 +82,7 @@ import dataGridConfiguration from './data.grid';
             const { name, id } = this.data.selectedRow;
             if (confirm(`Do you want to delete the record of ${name}?`)) {
                 try {
+                    this.data.selectedRow = null;
                     const response = await kangarooRest.delete(id);
                     const message  = response?.error?.message || response?.message;
                     alert(message);

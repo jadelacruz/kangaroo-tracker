@@ -8,8 +8,7 @@
     - [Database Setup](#database-setup)
         - [Laravel Migration](#laravel-migration)
         - [SQL Dump](#sql-dump)
-    
-- [Copyright](#copyright)
+- [Authors](#authors)
 
 ## Introduction
 This project is a tracker for kangaroos which has CRUD functionality to in better management and tracking of the kangaroos.
@@ -22,17 +21,20 @@ This project is a tracker for kangaroos which has CRUD functionality to in bette
 
 ## Installation
 ### Repository Cloning
+Cloning and changing directory to the project directory
 ```
 git clone https://github.com/jadelacruz/kangaroo-tracker.git
+cd kangaroo-tracker
 ```
 ### Package Installation
 Install PHP Packages using composer
 ```bash
 composer install
 ```
-Next step is to install Node packages using NPM
+Next step is to install Node packages using NPM and build the JS resources
 ```bash
 npm update
+npm run build
 ```
 ### Env Setup
 After setting up the installation of project packages,  we will have to update the __ENV file__ of the project. In the project repository, there is a file named __.env.example__ you can modify that file and specify the value needed for the follow fields:
@@ -64,6 +66,8 @@ php artisan migrate:fresh
 This command will create the table/s needed by the project
 
 #### SQL Dump
+_Note: Skip this if you chose the Laravel Migration instead of MySQL import thru dump._
+
 Check if __/dump.sql__ exists in the root directory of the project, this will be the dump file for the database table. To dump it to MySQL execute this command:
 ```bash
 mysql -u root -p vokke_pet_tracker < {path_to}/dump.sql
