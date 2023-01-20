@@ -28,7 +28,10 @@ class KangarooApiController
      */
     public function getAll(): JsonResponse
     {
-        return Response::json(new KangarooCollection($this->oService->getList()), HttpStatusCode::OK);
+        return Response::json(
+            new KangarooCollection($this->oService->getList()),
+            HttpStatusCode::OK
+        );
     }
 
     /**
@@ -38,7 +41,10 @@ class KangarooApiController
      */
     public function getById(int $iId): JsonResponse
     {
-        return Response::json(new KangarooResource($this->oService->getById($iId)), HttpStatusCode::OK);
+        return Response::json(
+            new KangarooResource($this->oService->getById($iId)),
+            HttpStatusCode::OK
+        );
     }
 
     /**
