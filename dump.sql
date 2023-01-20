@@ -32,7 +32,6 @@ CREATE TABLE `kangaroo` (
   `color` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nature` enum('f','nf') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `birth_date` date NOT NULL,
-  `del_timestamp` timestamp NULL DEFAULT NULL,
   `ins_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
   `upd_timestamp` datetime DEFAULT NULL ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),

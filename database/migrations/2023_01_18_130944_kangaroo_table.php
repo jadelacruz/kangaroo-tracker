@@ -32,7 +32,6 @@ return new class extends Migration
             $oTable->enum(KangarooConst::COL_NATURE, array_column(Nature::cases(), 'value'))
                 ->nullable();
             $oTable->date(KangarooConst::COL_BIRTH_DATE);
-            $oTable->softDeletes(KangarooConst::COL_DEDLETE_TS);
             $oTable->datetime(KangarooConst::COL_INSERT_TS)
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
             $oTable->datetime(KangarooConst::COL_UPDATE_TS)

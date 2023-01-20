@@ -22,7 +22,6 @@ class KangarooConstant
     const COL_BIRTH_DATE         = 'birth_date';
     const COL_INSERT_TS          = 'ins_timestamp';
     const COL_UPDATE_TS          = 'upd_timestamp';
-    const COL_DEDLETE_TS         = 'del_timestamp';
 
     /** Route constants */
     const ROUTE_PREFIX           = 'kangaroo';

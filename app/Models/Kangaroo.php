@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Constants\KangarooConstant as KangarooConst;
@@ -29,7 +28,6 @@ use App\Enums\Nature;
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo query()
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereBirthDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereDelTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereGender($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereId($value)
@@ -40,17 +38,11 @@ use App\Enums\Nature;
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereUpdTimestamp($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Kangaroo whereWeight($value)
  * @mixin \Eloquent
- * @method static \Illuminate\Database\Query\Builder|Kangaroo onlyTrashed()
- * @method static \Illuminate\Database\Query\Builder|Kangaroo withTrashed()
- * @method static \Illuminate\Database\Query\Builder|Kangaroo withoutTrashed()
  */
 class Kangaroo extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
     
-    /** @var string */
-    const DELETED_AT       = KangarooConst::COL_DEDLETE_TS;
-
     /** @var bool */
     public $timestamps     = false;
 
